@@ -1,0 +1,93 @@
+@startfiles
+.
+├── backend/
+│   ├── config/                                 # 📂 Configurações centralizadas da aplicação
+│   │   └── routes.php                          # 📁 Rotas PSR-15 centralizadas (Slim Framework)
+│   ├── containers/                             # 📦 Infraestrutura de Injeção de Dependências (DI)
+│   │   ├── AppContainer.php                    # 📦 Contêiner Pimple/PHP-DI com definições de classes
+│   │   └── AppBootstrap.php                    # 📦 Bootstrap de inicialização da aplicação
+│   ├── resources/                              # 🎨 Recursos Estáticos Não-Compilados e Views
+│   │   └── views/                              # 🎨 Templates Twig
+│   │       ├── admin/                          # 🗄️ Templates do Painel Administrativo
+│   │       │   ├── auth/                       # 🗄️ Telas de Autenticação do Admin
+│   │       │   ├── catalog/                    # 🗄️ Catálogo (category, manufacturer, product, supplier)
+│   │       │   ├── customer/                   # 🗄️ Clientes e Endereços
+│   │       │   ├── dashboard/                  # 📊 Dashboard do Admin
+│   │       │   ├── layouts/                    # 🗄️ Layouts e componentes reutilizáveis do Admin
+│   │       │   ├── sales/                      # 🗄️ Vendas, Pedidos e Vouchers
+│   │       │   └── setting/                    # ⚙️ Configurações da Loja
+│   │       ├── components/                     # 🖥️ Atomic Design
+│   │       │   ├── atoms/                      # 🖥️ Átomos
+│   │       │   ├── molecules/                  # 🖥️ Moléculas
+│   │       │   └── organisms/                  # 🗄️ Organismos
+│   │       ├── layouts/                        # 🖥️ Estruturas base (header, footer, html base)
+│   │       ├── pages/                          # 🖥️ Telas principais do E-commerce
+│   │       │   ├── auth/                       # 🖥️ Telas de login e registro
+│   │       │   ├── cart/                       # 🖥️ Carrinho e Checkout
+│   │       │   ├── category/                   # 🖥️ Categorias
+│   │       │   ├── errors/                     # 🔧 Erros (404, 500)
+│   │       │   ├── information/                # ℹ️ Informações institucionais
+│   │       │   ├── product/                    # 🖥️ Produtos
+│   │       │   └── user/                       # 👤 Minha Conta e Endereços
+│   │       └── pos/                            # 🛒 Views do Point of Sale (PDV)
+│   │           ├── cashier/                    # 💰 Layout do Caixa
+│   │           ├── sales_rep/                  # 🧑‍💼 Layout do Vendedor
+│   │           └── shared/                     # 🖥️ Páginas e componentes compartilhados do POS
+│   └── src/                                   # 🤖 Lógica principal da aplicação (Core Business Logic)
+│       ├── Admin/                              # 🖥️ Painel de Controle (Backoffice / Admin Panel)
+│       │   ├── Controllers/                    # 🖥️ Controladores do Admin (ADR Actions)
+│       │   │   ├── Auth/                       # 🔑 Autenticação Admin
+│       │   │   ├── Catalog/                    # 📂 Categorias, Produtos, Fabricantes, Fornecedores
+│       │   │   ├── Customer/                   # 👤 Gestão de Clientes e Endereços
+│       │   │   ├── Dashboard/                  # 📊 Dashboard Admin
+│       │   │   ├── Sales/                      # 💳 Pedidos e Vouchers
+│       │   │   └── Setting/                    # ⚙️ Configurações de Lojas
+│       │   └── Repositories/                   # 🗂️ Repositórios/Query Services do Admin
+│       └── Core/                               # 🏛️ Core do Sistema e Bounded Contexts
+│           ├── Auth/                           # 🔐 Módulo de Autenticação e Segurança
+│           │   ├── Middleware/                 # 🧱 Guards PSR-15 (Signature, Session, Language, Redirects)
+│           │   └── Services/                   # 🔐 Regras de negócio de acesso
+│           ├── Controllers/                    # 🎮 Controladores HTTP (ADR Pattern)
+│           │   ├── Actions/                    # 🎮 Ações por contexto (Auth, Cart, Catalog, Checkout, Customer)
+│           │   ├── Api/                        # 🤖 Endpoints de API REST
+│           │   └── Web/                        # 🌐 Handlers de rotas Web públicas
+│           ├── Infrastructure/                 # 🏗️ Camada de Infraestrutura
+│           │   ├── Persistence/                # 🏛️ Camada de Persistência
+│           │   │   ├── DataMapper/             # 🗺️ Mapeamento Entidade <-> Banco de Dados
+│           │   │   └── Repositories/           # 🏛️ Implementações concretas de Repositórios
+│           │   └── Services/                   # 🛠️ Serviços Externos (Gateways de Pagamento, Frete, RabbitMQ)
+│           ├── Model/                          # 🏛️ Coração do Domínio (DDD)
+│           │   ├── DTOs/                       # 🗂️ Data Transfer Objects unificados
+│           │   └── Domain/                     # 🏛️ Regras e Objetos de Domínio
+│           │       ├── Entities/               # 🏛️ Entidades puras (Customer, Product, Order, Geo, Supplier)
+│           │       ├── Factories/              # 🏛️ Fábricas de entidades
+│           │       └── Observers/              # 👀 Observadores e Event Handlers
+│           ├── Locales/                        # 🌐 Arquivos de internacionalização (en-gb, fr-fr, pt-br)
+│           └── Support/                        # 🛠️ Helpers transversais (Cache, Hydrator, String, Twig)
+├── database/                                   # 🗄️ Schemas, Migrações e Seeds SQL
+│   ├── migrations/                             # 📂 Migrações de tabelas de banco de dados
+│   └── seeds/                                  # 📂 Dados iniciais de povoamento
+├── docs/                                       # 📚 Arquivos de Documentação Arquitetural e Progresso
+│   ├── architecture/                       # 🏗️ Arquitetura do software (ADRs, Agentes, Componentes, Deployment)
+│   ├── business/                           # 🧰 Regras de Negócio e Processos (glossary, processes, use-cases)
+│   ├── database/                           # 🗄️ Banco de dados e diagramas EER
+│   ├── diagrams/                           # 📊 Diagramas
+│   ├── installation/                       # 🔧 Instalação e Setup do Ambiente
+│   ├── kb/                                 # 🧠 Base de conhecimento de políticas da loja
+│   ├── requirements/                       # 🎯 Requisitos (business_rules, functional, non_functional)
+│   ├── specs/                              # 🗄️ Especificações
+│   ├── tutorials/                          # 📖 Tutoriais
+│   └── workflows/                          # 🔄 Workflows de Processos (activity e sequence diagrams)
+├── public_html/                            # 🌐 Webroot (Document Root servido pela Hostinger)
+│   ├── index.php                           # 🚀 Front Controller (inicializa Bootstrap do backend/)
+│   ├── cache/                              # 🗂️ Cache público de assets
+│   ├── css/                                # 🎨 Folhas de estilo (Estilos centralizados)
+│   ├── fonts/                              # 🔤 Tipografia e Ícones Locais
+│   ├── image/                              # 🖼️ Imagens públicas e uploads
+│   └── js/                                 # ⚡ Scripts Vanilla JS e integrações de formulário (AJAX)
+├── scripts/                                # 📂 Scripts de automação, DevOps e utilitários (Python, PHP, Bash)
+└── tests/                                  # 🧪 Suíte de Testes Automatizados (PHPUnit)
+    ├── Feature/                            # 🧪 Testes funcionais e de rotas HTTP
+    ├── Integration/                        # 🧪 Testes de integração de banco de dados e serviços
+    └── Unit/                               # 🧪 Testes unitários de regras de domínio
+@endfiles
