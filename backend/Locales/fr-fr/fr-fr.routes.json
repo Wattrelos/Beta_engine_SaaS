@@ -1,0 +1,248 @@
+{
+  "_locale": "fr-fr",
+  "routes": {
+    "home": {
+      "path": "",
+      "title": "Accueil"
+    },
+    "login.form": {
+      "path": "/connexion",
+      "aliases": [
+        "/login"
+      ],
+      "title": "Connexion"
+    },
+    "login.submit": {
+      "path": "/connexion"
+    },
+    "register.form": {
+      "path": "/inscription",
+      "aliases": [
+        "/creer-un-compte"
+      ],
+      "title": "Créer un compte"
+    },
+    "register.submit": {
+      "path": "/inscription"
+    },
+    "logout": {
+      "path": "/deconnexion",
+      "aliases": [
+        "/logout"
+      ],
+      "title": "Déconnexion"
+    },
+    "account.password_request": {
+      "path": "/mot-de-passe-oublie",
+      "aliases": [
+        "/recuperer-mot-de-passe"
+      ],
+      "title": "Mot de passe oublié"
+    },
+    "account.password_reset": {
+      "path": "/reinitialiser-mot-de-passe",
+      "title": "Réinitialiser le mot de passe"
+    },
+    "account.password_reset.logged": {
+      "path": "/compte/changer-mot-de-passe",
+      "aliases": [
+        "/compte/reinitialiser-mot-de-passe"
+      ],
+      "title": "Changer le mot de passe"
+    },
+    "account.index": {
+      "path": "/compte",
+      "aliases": [
+        "/mon-compte",
+        "/tableau-de-bord"
+      ],
+      "title": "Mon Compte"
+    },
+    "account.orders": {
+      "path": "/compte/commandes",
+      "aliases": [
+        "/compte/historique-commandes"
+      ],
+      "title": "Mes Commandes"
+    },
+    "account.order.history": {
+      "path": "/compte/commandes/{order_id}",
+      "aliases": [
+        "/compte/commande/{order_id}"
+      ],
+      "title": "Détails de la Commande"
+    },
+    "account.returns": {
+      "path": "/compte/retours",
+      "title": "Retours et Réclamations"
+    },
+    "account.returns.add": {
+      "path": "/compte/retours/nouveau",
+      "title": "Demander un Retour"
+    },
+    "account.returns.show": {
+      "path": "/compte/retours/{id:[0-9]+}",
+      "title": "Détails du Retour"
+    },
+    "account.edit": {
+      "path": "/compte/modifier",
+      "aliases": [
+        "/compte/profil"
+      ],
+      "title": "Modifier mon Profil"
+    },
+    "account.newsletter": {
+      "path": "/compte/newsletter",
+      "title": "Abonnement Newsletter"
+    },
+    "account.transaction": {
+      "path": "/compte/transactions",
+      "title": "Historique des Transactions"
+    },
+    "account.wishlist": {
+      "path": "/compte/liste-envies",
+      "aliases": [
+        "/compte/favoris"
+      ],
+      "title": "Ma Liste d'Envies"
+    },
+    "account.wishlist.add": {
+      "path": "/compte/liste-envies/ajouter"
+    },
+    "account.wishlist.remove": {
+      "path": "/compte/liste-envies/supprimer/{product_id:[0-9]+}"
+    },
+    "account.addresses": {
+      "path": "/compte/adresses",
+      "aliases": [
+        "/compte/carnet-adresses"
+      ],
+      "title": "Carnet d'Adresses"
+    },
+    "account.address.create": {
+      "path": "/compte/adresses/nouvelle",
+      "title": "Ajouter une Adresse"
+    },
+    "account.address.edit": {
+      "path": "/compte/adresses/{address_id:[0-9]+}/modifier",
+      "title": "Modifier l'Adresse"
+    },
+    "account.address.delete": {
+      "path": "/compte/adresses/{address_id:[0-9]+}/supprimer",
+      "title": "Supprimer l'Adresse"
+    },
+    "account.projects": {
+      "path": "/compte/projets",
+      "title": "Mes Projets & Devis"
+    },
+    "account.projects.bids": {
+      "path": "/compte/projets/{rfq_id:[0-9]+}/offres",
+      "title": "Comparatif des Devis"
+    },
+    "account.projects.bids.accept": {
+      "path": "/compte/projets/{rfq_id:[0-9]+}/offres/{bid_id:[0-9]+}/accepter",
+      "title": "Accepter le Devis"
+    },
+    "account.projects.boq": {
+      "path": "/compte/projets/{rfq_id:[0-9]+}/boq",
+      "title": "Bordereau Quantitatif (BoQ)"
+    },
+    "projects.create": {
+      "path": "/projets/nouveau",
+      "aliases": [
+        "/demande-devis"
+      ],
+      "title": "Demande de Devis de Projet"
+    },
+    "api.projects.add_item": {
+      "path": "/api/projets/ajouter-article"
+    },
+    "api.projects.my_projects": {
+      "path": "/api/projets/mes-projets"
+    },
+    "provider.opportunities": {
+      "path": "/prestataire/opportunites",
+      "title": "Opportunités de Services"
+    },
+    "provider.projects.bid": {
+      "path": "/prestataire/projets/{rfq_id:[0-9]+}/devis",
+      "title": "Soumettre un Devis"
+    },
+    "provider.projects.takeoff": {
+      "path": "/prestataire/projets/{rfq_id:[0-9]+}/metres",
+      "title": "Métré des Matériaux"
+    },
+    "api.takeoff.search_products": {
+      "path": "/api/produits/recherche-metres"
+    },
+    "product.detail": {
+      "path": "/produit/{slug}",
+      "title": "Détails du Produit"
+    },
+    "category.detail": {
+      "path": "/categorie/{slug}",
+      "title": "Catégorie"
+    },
+    "info.page": {
+      "path": "/page/{slug}",
+      "aliases": [
+        "/information/{slug}"
+      ],
+      "title": "Page d'Information"
+    },
+    "sitemap": {
+      "path": "/plan-du-site",
+      "aliases": [
+        "/sitemap",
+        "/information/sitemap"
+      ],
+      "title": "Plan du Site"
+    },
+    "contact": {
+      "path": "/contact",
+      "aliases": [
+        "/contactez-nous",
+        "/information/contact"
+      ],
+      "title": "Contactez-nous"
+    },
+    "search": {
+      "path": "/recherche",
+      "title": "Recherche de Produits"
+    },
+    "cart.index": {
+      "path": "/panier",
+      "aliases": [
+        "/mon-panier"
+      ],
+      "title": "Panier d'Achat"
+    },
+    "cart.add": {
+      "path": "/panier/ajouter"
+    },
+    "cart.edit": {
+      "path": "/panier/modifier"
+    },
+    "cart.remove": {
+      "path": "/panier/supprimer/{key}"
+    },
+    "checkout.index": {
+      "path": "/commande",
+      "aliases": [
+        "/caisse",
+        "/checkout"
+      ],
+      "title": "Passer la Commande"
+    },
+    "checkout.submit": {
+      "path": "/commande"
+    },
+    "checkout.success": {
+      "path": "/commande/succes",
+      "aliases": [
+        "/commande-confirmee"
+      ],
+      "title": "Commande Confirmée"
+    }
+  }
+}

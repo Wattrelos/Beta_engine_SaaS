@@ -1,0 +1,264 @@
+{
+  "_locale": "en-gb",
+  "routes": {
+    "home": {
+      "path": "",
+      "title": "Home"
+    },
+    "login.form": {
+      "path": "/login",
+      "aliases": [
+        "/signin"
+      ],
+      "title": "Sign In"
+    },
+    "login.submit": {
+      "path": "/login"
+    },
+    "register.form": {
+      "path": "/register",
+      "aliases": [
+        "/signup",
+        "/create-account"
+      ],
+      "title": "Create an Account"
+    },
+    "register.submit": {
+      "path": "/register"
+    },
+    "logout": {
+      "path": "/logout",
+      "aliases": [
+        "/signout"
+      ],
+      "title": "Sign Out"
+    },
+    "account.password_request": {
+      "path": "/forgot-password",
+      "aliases": [
+        "/recover-password"
+      ],
+      "title": "Forgot Password"
+    },
+    "account.password_reset": {
+      "path": "/reset-password",
+      "title": "Reset Password"
+    },
+    "account.password_reset.logged": {
+      "path": "/account/reset-password",
+      "aliases": [
+        "/account/change-password"
+      ],
+      "title": "Change Password"
+    },
+    "account.index": {
+      "path": "/account",
+      "aliases": [
+        "/my-account",
+        "/dashboard"
+      ],
+      "title": "My Account"
+    },
+    "account.orders": {
+      "path": "/account/orders",
+      "aliases": [
+        "/account/order-history"
+      ],
+      "title": "Order History"
+    },
+    "account.order.history": {
+      "path": "/account/order/history/{order_id}",
+      "aliases": [
+        "/account/orders/{order_id}"
+      ],
+      "title": "Order Details"
+    },
+    "account.returns": {
+      "path": "/account/returns",
+      "aliases": [
+        "/account/return"
+      ],
+      "title": "Product Returns"
+    },
+    "account.returns.add": {
+      "path": "/account/returns/add",
+      "title": "Request Product Return"
+    },
+    "account.returns.show": {
+      "path": "/account/returns/{id:[0-9]+}",
+      "title": "Return Details"
+    },
+    "account.edit": {
+      "path": "/account/edit",
+      "aliases": [
+        "/account/profile"
+      ],
+      "title": "Edit Profile"
+    },
+    "account.newsletter": {
+      "path": "/account/newsletter",
+      "title": "Newsletter Subscription"
+    },
+    "account.transaction": {
+      "path": "/account/transactions",
+      "aliases": [
+        "/account/transaction"
+      ],
+      "title": "Account Transactions"
+    },
+    "account.wishlist": {
+      "path": "/account/wishlist",
+      "aliases": [
+        "/account/favorites"
+      ],
+      "title": "My Wishlist"
+    },
+    "account.wishlist.add": {
+      "path": "/account/wishlist/add"
+    },
+    "account.wishlist.remove": {
+      "path": "/account/wishlist/remove/{product_id:[0-9]+}"
+    },
+    "account.addresses": {
+      "path": "/account/addresses",
+      "aliases": [
+        "/account/address-book"
+      ],
+      "title": "Address Book"
+    },
+    "account.address.create": {
+      "path": "/account/address/create",
+      "title": "Add New Address"
+    },
+    "account.address.edit": {
+      "path": "/account/address/{address_id:[0-9]+}/edit",
+      "title": "Edit Address"
+    },
+    "account.address.delete": {
+      "path": "/account/address/{address_id:[0-9]+}/delete",
+      "title": "Delete Address"
+    },
+    "account.projects": {
+      "path": "/account/projects",
+      "title": "My Projects & RFQ"
+    },
+    "account.projects.bids": {
+      "path": "/account/projects/{rfq_id:[0-9]+}/bids",
+      "title": "Compare Bids"
+    },
+    "account.projects.bids.accept": {
+      "path": "/account/projects/{rfq_id:[0-9]+}/bids/{bid_id:[0-9]+}/accept",
+      "title": "Accept Bid Proposal"
+    },
+    "account.projects.boq": {
+      "path": "/account/projects/{rfq_id:[0-9]+}/boq",
+      "title": "Bill of Quantities (BoQ)"
+    },
+    "projects.create": {
+      "path": "/projects/new",
+      "aliases": [
+        "/request-quote"
+      ],
+      "title": "New Project RFQ"
+    },
+    "api.projects.add_item": {
+      "path": "/api/projects/add-item"
+    },
+    "api.projects.my_projects": {
+      "path": "/api/projects/my-projects"
+    },
+    "provider.opportunities": {
+      "path": "/contractor/opportunities",
+      "aliases": [
+        "/provider/opportunities"
+      ],
+      "title": "Service Opportunities"
+    },
+    "provider.projects.bid": {
+      "path": "/contractor/projects/{rfq_id:[0-9]+}/bid",
+      "aliases": [
+        "/provider/projects/{rfq_id:[0-9]+}/bid"
+      ],
+      "title": "Submit Bid Proposal"
+    },
+    "provider.projects.takeoff": {
+      "path": "/contractor/projects/{rfq_id:[0-9]+}/takeoff",
+      "aliases": [
+        "/provider/projects/{rfq_id:[0-9]+}/takeoff"
+      ],
+      "title": "Material Takeoff Tool"
+    },
+    "api.takeoff.search_products": {
+      "path": "/api/products/search-takeoff"
+    },
+    "product.detail": {
+      "path": "/product/{slug}",
+      "title": "Product Details"
+    },
+    "category.detail": {
+      "path": "/category/{slug}",
+      "title": "Category"
+    },
+    "info.page": {
+      "path": "/page/{slug}",
+      "aliases": [
+        "/information/{slug}"
+      ],
+      "title": "Information"
+    },
+    "sitemap": {
+      "path": "/sitemap",
+      "aliases": [
+        "/site-map",
+        "/information/sitemap"
+      ],
+      "title": "Site Map"
+    },
+    "contact": {
+      "path": "/contact",
+      "aliases": [
+        "/contact-us",
+        "/information/contact"
+      ],
+      "title": "Contact Us"
+    },
+    "search": {
+      "path": "/search",
+      "title": "Search Catalog"
+    },
+    "cart.index": {
+      "path": "/cart",
+      "aliases": [
+        "/basket",
+        "/shopping-cart"
+      ],
+      "title": "Shopping Cart"
+    },
+    "cart.add": {
+      "path": "/cart/add"
+    },
+    "cart.edit": {
+      "path": "/cart/edit"
+    },
+    "cart.remove": {
+      "path": "/cart/remove/{key}"
+    },
+    "checkout.index": {
+      "path": "/checkout",
+      "aliases": [
+        "/order/checkout"
+      ],
+      "title": "Checkout"
+    },
+    "checkout.submit": {
+      "path": "/checkout"
+    },
+    "checkout.success": {
+      "path": "/checkout/success",
+      "aliases": [
+        "/order/confirmed"
+      ],
+      "title": "Order Placed Successfully"
+    }
+  }
+}
