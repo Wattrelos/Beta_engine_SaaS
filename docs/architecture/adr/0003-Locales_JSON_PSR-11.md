@@ -23,8 +23,8 @@ rules:
   psr11_bindings:
     container_keys:
       - "language"
-      - "Alpha\Support\Language"
-    class_resolving: "Alpha\Support\Language"
+      - 'Alpha\Support\Language'
+    class_resolving: 'Alpha\Support\Language'
 validation:
   must_use_di: true
   forbidden_calls:
