@@ -1,0 +1,270 @@
+{
+  "_locale": "pt-br",
+  "routes": {
+    "home": {
+      "path": "",
+      "title": "Página Inicial"
+    },
+    "login.form": {
+      "path": "/login",
+      "aliases": [
+        "/entrar"
+      ],
+      "title": "Acessar Conta"
+    },
+    "login.submit": {
+      "path": "/login"
+    },
+    "register.form": {
+      "path": "/cadastro",
+      "aliases": [
+        "/registrar",
+        "/criar-conta"
+      ],
+      "title": "Criar Nova Conta"
+    },
+    "register.submit": {
+      "path": "/cadastro"
+    },
+    "logout": {
+      "path": "/logout",
+      "aliases": [
+        "/sair"
+      ],
+      "title": "Encerrar Sessão"
+    },
+    "account.password_request": {
+      "path": "/recuperar-senha",
+      "aliases": [
+        "/esqueci-senha"
+      ],
+      "title": "Recuperar Senha"
+    },
+    "account.password_reset": {
+      "path": "/resetar-senha",
+      "aliases": [
+        "/redefinir-senha"
+      ],
+      "title": "Redefinir Senha"
+    },
+    "account.password_reset.logged": {
+      "path": "/account/resetar-senha",
+      "aliases": [
+        "/account/alterar-senha"
+      ],
+      "title": "Alterar Senha"
+    },
+    "account.index": {
+      "path": "/account",
+      "aliases": [
+        "/minha-conta",
+        "/painel"
+      ],
+      "title": "Minha Conta"
+    },
+    "account.orders": {
+      "path": "/account/orders",
+      "aliases": [
+        "/account/pedidos",
+        "/pedidos"
+      ],
+      "title": "Histórico de Pedidos"
+    },
+    "account.order.history": {
+      "path": "/account/order/history/{order_id}",
+      "aliases": [
+        "/account/pedidos/{order_id}"
+      ],
+      "title": "Detalhes do Pedido"
+    },
+    "account.returns": {
+      "path": "/account/return",
+      "aliases": [
+        "/account/devolucoes"
+      ],
+      "title": "Devoluções e Trocas"
+    },
+    "account.returns.add": {
+      "path": "/account/return/add",
+      "aliases": [
+        "/account/devolucoes/nova"
+      ],
+      "title": "Solicitar Devolução"
+    },
+    "account.returns.show": {
+      "path": "/account/return/{id:[0-9]+}",
+      "title": "Detalhes da Devolução"
+    },
+    "account.edit": {
+      "path": "/account/edit",
+      "aliases": [
+        "/account/perfil",
+        "/account/dados"
+      ],
+      "title": "Editar Perfil"
+    },
+    "account.newsletter": {
+      "path": "/account/newsletter",
+      "title": "Inscrição de Informativo"
+    },
+    "account.transaction": {
+      "path": "/account/transaction",
+      "aliases": [
+        "/account/transacoes"
+      ],
+      "title": "Transações e Extrato"
+    },
+    "account.wishlist": {
+      "path": "/account/wishlist",
+      "aliases": [
+        "/account/favoritos"
+      ],
+      "title": "Lista de Desejos"
+    },
+    "account.wishlist.add": {
+      "path": "/account/wishlist/add"
+    },
+    "account.wishlist.remove": {
+      "path": "/account/wishlist/remove/{product_id:[0-9]+}"
+    },
+    "account.addresses": {
+      "path": "/account/addresses",
+      "aliases": [
+        "/account/enderecos"
+      ],
+      "title": "Lista de Endereços"
+    },
+    "account.address.create": {
+      "path": "/account/address/create",
+      "aliases": [
+        "/account/enderecos/novo"
+      ],
+      "title": "Cadastrar Novo Endereço"
+    },
+    "account.address.edit": {
+      "path": "/account/address/{address_id:[0-9]+}/edit",
+      "title": "Editar Endereço"
+    },
+    "account.address.delete": {
+      "path": "/account/address/{address_id:[0-9]+}/delete",
+      "title": "Excluir Endereço"
+    },
+    "account.projects": {
+      "path": "/account/projetos",
+      "title": "Meus Projetos e Cotações"
+    },
+    "account.projects.bids": {
+      "path": "/account/projetos/{rfq_id:[0-9]+}/propostas",
+      "title": "Comparação de Propostas"
+    },
+    "account.projects.bids.accept": {
+      "path": "/account/projetos/{rfq_id:[0-9]+}/propostas/{bid_id:[0-9]+}/aceitar",
+      "title": "Aceitar Proposta"
+    },
+    "account.projects.boq": {
+      "path": "/account/projetos/{rfq_id:[0-9]+}/boq",
+      "title": "Lista de Materiais (BoQ)"
+    },
+    "projects.create": {
+      "path": "/projetos/novo",
+      "aliases": [
+        "/solicitar-orcamento"
+      ],
+      "title": "Solicitar Orçamento de Projeto"
+    },
+    "api.projects.add_item": {
+      "path": "/api/projetos/adicionar-item"
+    },
+    "api.projects.my_projects": {
+      "path": "/api/projetos/meus-projetos"
+    },
+    "provider.opportunities": {
+      "path": "/prestador/oportunidades",
+      "title": "Oportunidades de Serviços"
+    },
+    "provider.projects.bid": {
+      "path": "/prestador/projetos/{rfq_id:[0-9]+}/proposta",
+      "title": "Enviar Proposta Comercial"
+    },
+    "provider.projects.takeoff": {
+      "path": "/prestador/projetos/{rfq_id:[0-9]+}/takeoff",
+      "title": "Levantamento de Materiais (Takeoff)"
+    },
+    "api.takeoff.search_products": {
+      "path": "/api/produtos/buscar-takeoff"
+    },
+    "product.detail": {
+      "path": "/produto/{slug}",
+      "title": "Detalhe do Produto"
+    },
+    "category.detail": {
+      "path": "/categoria/{slug}",
+      "title": "Categoria"
+    },
+    "info.page": {
+      "path": "/pagina/{slug}",
+      "aliases": [
+        "/informacao/{slug}"
+      ],
+      "title": "Página Institucional"
+    },
+    "sitemap": {
+      "path": "/mapa-do-site",
+      "aliases": [
+        "/sitemap",
+        "/informacao/sitemap",
+        "/information/sitemap"
+      ],
+      "title": "Mapa do Site"
+    },
+    "contact": {
+      "path": "/contato",
+      "aliases": [
+        "/contact",
+        "/informacao/contato",
+        "/information/contact"
+      ],
+      "title": "Fale Conosco"
+    },
+    "search": {
+      "path": "/busca",
+      "aliases": [
+        "/pesquisa"
+      ],
+      "title": "Busca de Produtos"
+    },
+    "cart.index": {
+      "path": "/carrinho",
+      "aliases": [
+        "/sacola"
+      ],
+      "title": "Carrinho de Compras"
+    },
+    "cart.add": {
+      "path": "/carrinho/adicionar"
+    },
+    "cart.edit": {
+      "path": "/carrinho/editar"
+    },
+    "cart.remove": {
+      "path": "/carrinho/remover/{key}"
+    },
+    "checkout.index": {
+      "path": "/checkout",
+      "aliases": [
+        "/finalizar-compra"
+      ],
+      "title": "Finalização de Compra"
+    },
+    "checkout.submit": {
+      "path": "/checkout"
+    },
+    "checkout.success": {
+      "path": "/checkout/sucesso",
+      "aliases": [
+        "/pedido-concluido"
+      ],
+      "title": "Pedido Realizado com Sucesso"
+    }
+  }
+}
