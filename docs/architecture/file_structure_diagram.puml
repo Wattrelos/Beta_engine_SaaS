@@ -1,6 +1,7 @@
 @startfiles
 .
-├── backend/
+├── .env.example                                # 🔑 Arquivo modelo de variáveis de ambiente
+├── backend/                                    # 📁 Backend (Core Business Logic)
 │   ├── config/                                 # 📂 Configurações centralizadas da aplicação
 │   │   └── routes.php                          # 📁 Rotas PSR-15 centralizadas (Slim Framework)
 │   ├── containers/                             # 📦 Infraestrutura de Injeção de Dependências (DI)
@@ -33,7 +34,7 @@
 │   │           ├── cashier/                    # 💰 Layout do Caixa
 │   │           ├── sales_rep/                  # 🧑‍💼 Layout do Vendedor
 │   │           └── shared/                     # 🖥️ Páginas e componentes compartilhados do POS
-│   └── src/                                   # 🤖 Lógica principal da aplicação (Core Business Logic)
+│   └── src/                                    # 🤖 Lógica principal da aplicação (Core Business Logic)
 │       ├── Admin/                              # 🖥️ Painel de Controle (Backoffice / Admin Panel)
 │       │   ├── Controllers/                    # 🖥️ Controladores do Admin (ADR Actions)
 │       │   │   ├── Auth/                       # 🔑 Autenticação Admin
@@ -64,27 +65,63 @@
 │           │       └── Observers/              # 👀 Observadores e Event Handlers
 │           ├── Locales/                        # 🌐 Arquivos de internacionalização (en-gb, fr-fr, pt-br)
 │           └── Support/                        # 🛠️ Helpers transversais (Cache, Hydrator, String, Twig)
+│
+├── public_html/                                # 🌐 Webroot (Document Root servido pela Hostinger)
+│   ├── index.php                               # 🚀 Front Controller (inicializa Bootstrap do backend/)
+│   ├── cache/                                  # 🗂️ Cache público de assets
+│   ├── css/                                    # 🎨 Folhas de estilo (Estilos centralizados)
+│   ├── fonts/                                  # 🔤 Tipografia e Ícones Locais
+│   ├── image/                                  # 🖼️ Imagens públicas e uploads
+│   ├── js/                                     # ⚡ Scripts Vanilla JS e integrações de formulário (AJAX)
+│   └── admin-ZPdHED2dC7Gjrg2b/                 # 🛡️ Root público do painel administrativa (ofuscado p/ segurança)
+│
+│   # =====================================> Pastas que não irão para produção (testes, docs e specs)  <=========================
+│
+├── .env                                        # 🔑 Arquivo de variáveis de ambiente
 ├── database/                                   # 🗄️ Schemas, Migrações e Seeds SQL
 │   ├── migrations/                             # 📂 Migrações de tabelas de banco de dados
 │   └── seeds/                                  # 📂 Dados iniciais de povoamento
+│
 ├── docs/                                       # 📚 Arquivos de Documentação Arquitetural e Progresso
-│   ├── architecture/                       # 🏗️ Arquitetura do software (ADRs, Agentes, Componentes, Deployment)
-│   ├── business/                           # 🧰 Regras de Negócio e Processos (glossary, processes, use-cases)
-│   ├── database/                           # 🗄️ Banco de dados e diagramas EER
-│   ├── diagrams/                           # 📊 Diagramas
-│   ├── installation/                       # 🔧 Instalação e Setup do Ambiente
-│   ├── kb/                                 # 🧠 Base de conhecimento de políticas da loja
-│   ├── requirements/                       # 🎯 Requisitos (business_rules, functional, non_functional)
-│   ├── specs/                              # 🗄️ Especificações
-│   ├── tutorials/                          # 📖 Tutoriais
-│   └── workflows/                          # 🔄 Workflows de Processos (activity e sequence diagrams)
-├── public_html/                            # 🌐 Webroot (Document Root servido pela Hostinger)
-│   ├── index.php                           # 🚀 Front Controller (inicializa Bootstrap do backend/)
-│   ├── cache/                              # 🗂️ Cache público de assets
-│   ├── css/                                # 🎨 Folhas de estilo (Estilos centralizados)
-│   ├── fonts/                              # 🔤 Tipografia e Ícones Locais
-│   ├── image/                              # 🖼️ Imagens públicas e uploads
-│   └── js/                                 # ⚡ Scripts Vanilla JS e integrações de formulário (AJAX)
+│   ├── architecture/                           # 🏗️ Arquitetura do software (ADRs, Agentes, Componentes, Deployment)
+│   │   ├── adr/                                # 📝 Architecture Decision Records (ADRs)
+│   │   ├── agents/                             # 📍 Glossário/Tokens dos Agentes de IA
+│   │   ├── components/                         # 🧩 Componentes arquiteturais
+│   │   ├── deployment/                         # 🚀 Deployment
+│   │   └── reviews                             # 🔍 Walkthroughs técnicos e revisões de design
+│   ├── business/                               # 🧰 Regras de Negócio e Processos (glossary, processes, use-cases)
+│   │   ├── glossary/                           # 📖 Glossário de termos técnicos (README)
+│   │   ├── processes/                          # 📋 Processos de negócio (README)
+│   │   └── use-cases/                          # 🧩 Requerimentos e Casos de Uso (README)
+│   ├── database/                               # 🗄️ Banco de dados e diagramas EER
+│   ├── diagrams/                               # 📊 Diagramas
+│   ├── DoD/                                    # 🎯 Definition of Done (DoD)
+│   ├── installation/                           # 🔧 Instalação e Setup do Ambiente
+│   ├── kb/                                     # 🧠 Base de conhecimento de políticas da loja
+│   ├── requirements/                           # 🎯 Requisitos (business_rules, functional, non_functional)
+│   │   ├── business_rules/                     # 📋 Regras de negócio (.yaml, glossário)
+│   │   ├── functional/                         # 📋 Requisitos funcionais (.yaml)
+│   │   └── non_functional/                     # 📋 Requisitos não funcionais (.yaml)
+│   ├── specs/                                  # 🗄️ Especificações
+│   ├── tutorials/                              # 📖 Tutoriais
+│   └── workflows/                              # 🔄 Workflows de Processos (activity e sequence diagrams)
+│       ├── activity_diagrams/                  # 🔄 Diagramas de atividades (README)
+│       └── sequence_diagrams/                  # 🔄 Diagramas de sequência (.puml)
+│   
+├── e2e/                                        # 🧪 Testes de ponta a ponta
+│
+├── features/                                   # 📂 Funcionalidades testes de software
+│   ├── api/                                    # 🖥️ Testes de API
+│   ├── auth/                                   # 👤 Testes de Autenticação
+│   ├── architecture/                           # 📁 Testes de Arquitetura
+│   ├── bootstrap/                              # 📁 Testes de Bootstrap
+│   ├── cart/                                   # 📦 Testes de Carrinho
+│   ├── checkout/                               # 🛒 Testes de Checkout
+│   ├── frontend/                               # 🖥️ Testes de Frontend
+│   ├── backend/                                # 🖥️ Testes de Backend
+│   ├── security/                               # 🔐 Testes de Segurança
+│   └── use_cases/                              # 📦 Testes de casos de uso
+│
 ├── scripts/                                # 📂 Scripts de automação, DevOps e utilitários (Python, PHP, Bash)
 └── tests/                                  # 🧪 Suíte de Testes Automatizados (PHPUnit)
     ├── Feature/                            # 🧪 Testes funcionais e de rotas HTTP
