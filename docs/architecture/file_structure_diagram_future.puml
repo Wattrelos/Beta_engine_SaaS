@@ -1,0 +1,159 @@
+@startfiles
+.
+├── .env.example                                # 🔑 Modelo oficial de variáveis de ambiente do projeto
+├── composer.json                               # 📦 Manifesto de dependências e autoloader PSR-4
+├── composer.lock                               # 🔒 Bloqueio de versões exatas de dependências
+├── phpunit.xml                                 # 🧪 Configuração de suites de testes automatizados
+├── README.md                                   # 📖 Documentação introdutória do projeto
+│
+├── backend/                                    # 📁 Backend (Clean Architecture / DDD Modular / PSR-15)
+│   ├── config/                                 # 📂 Configurações centralizadas da aplicação
+│   │   ├── app.php                             # ⚙️ Parâmetros gerais do sistema e ambiente
+│   │   ├── database.php                        # 🗄️ Conexão com banco de dados MySQL
+│   │   ├── dependencies.php                    # 📦 Injeção de Dependências PSR-11 (PHP-DI)
+│   │   ├── middleware.php                      # 🧱 Pipeline global de Middlewares PSR-15
+│   │   └── routes/                             # 🚦 Rotas desacopladas por contexto de aplicação
+│   │       ├── admin.php                       # 🛡️ Rotas do Painel Administrativo
+│   │       ├── api.php                         # 🤖 Rotas RESTful da API v1
+│   │       ├── pos.php                         # 🛒 Rotas do Ponto de Venda (PDV)
+│   │       └── storefront.php                  # 🛍️ Rotas da Loja Virtual (E-commerce)
+│   │
+│   ├── src/                                    # 🏛️ Código-Fonte Autoloaded (Namespace: App\ ou BetaEngine\)
+│   │   │
+│   │   ├── Domain/                             # 💎 Camada Enterprise (Regras de Negócio Puras - Zero Dependências)
+│   │   │   ├── Shared/                         # 🌐 Elementos compartilhados entre agregados
+│   │   │   │   ├── Enums/                      # 🏷️ Enumerações de status, tipos e estados
+│   │   │   │   ├── Events/                     # 📣 Eventos de domínio (Domain Events)
+│   │   │   │   └── ValueObjects/               # 💎 Objetos de Valor (Money, Email, CpfCnpj, Address, Id)
+│   │   │   │
+│   │   │   ├── Catalog/                        # 📦 Bounded Context: Catálogo de Produtos
+│   │   │   │   ├── Entities/                   # 🏛️ Entidades (Product, Category, Manufacturer)
+│   │   │   │   ├── Events/                     # 📣 Eventos (ProductPriceChanged, StockDepleted)
+│   │   │   │   └── Repositories/               # 📜 Interfaces/Contratos de Repositório (ProductRepositoryInterface)
+│   │   │   │
+│   │   │   ├── Customer/                       # 👤 Bounded Context: Clientes e CRM
+│   │   │   │   ├── Entities/                   # 🏛️ Entidades (Customer, CustomerAddress, CustomerHistory)
+│   │   │   │   └── Repositories/               # 📜 Interfaces (CustomerRepositoryInterface)
+│   │   │   │
+│   │   │   ├── Order/                          # 🧾 Bounded Context: Vendas e Pedidos
+│   │   │   │   ├── Entities/                   # 🏛️ Entidades (Order, OrderItem, OrderHistory)
+│   │   │   │   ├── Aggregates/                 # 🧱 Raiz de Agregação do Pedido (OrderAggregate)
+│   │   │   │   └── Repositories/               # 📜 Interfaces (OrderRepositoryInterface)
+│   │   │   │
+│   │   │   ├── Cart/                           # 🛒 Bounded Context: Carrinho de Compras
+│   │   │   │   ├── Entities/                   # 🏛️ Entidades (Cart, CartItem)
+│   │   │   │   └── Repositories/               # 📜 Interfaces (CartRepositoryInterface)
+│   │   │   │
+│   │   │   ├── POS/                            # 🏪 Bounded Context: Ponto de Venda
+│   │   │   │   ├── Entities/                   # 🏛️ Entidades (PreSale, CashRegister, SaleSession)
+│   │   │   │   └── Repositories/               # 📜 Interfaces (PreSaleRepositoryInterface)
+│   │   │   │
+│   │   │   ├── Procurement/                    # 🚛 Bounded Context: Compras e Fornecedores
+│   │   │   │   ├── Entities/                   # 🏛️ Entidades (Supplier, PurchaseOrder)
+│   │   │   │   └── Repositories/               # 📜 Interfaces (SupplierRepositoryInterface)
+│   │   │   │
+│   │   │   └── Security/                       # 🔐 Bounded Context: Acesso e Permissões (RBAC)
+│   │   │       ├── Entities/                   # 🏛️ Entidades (AdminUser, Role, Permission)
+│   │   │       └── Repositories/               # 📜 Interfaces (UserRepositoryInterface)
+│   │   │
+│   │   ├── Application/                        # 💼 Camada de Aplicação (Casos de Uso e Orquestração)
+│   │   │   ├── Common/                         # 🛠️ Interfaces de barramentos e handlers comuns
+│   │   │   ├── Catalog/                        # 📦 Casos de Uso do Catálogo
+│   │   │   │   ├── DTOs/                       # 📋 DTOs de Entrada e Saída (ProductSearchDTO, ProductResponseDTO)
+│   │   │   │   └── UseCases/                   # ⚙️ Casos de Uso (SearchCatalogUseCase, GetProductDetailsUseCase)
+│   │   │   ├── Customer/                       # 👤 Casos de Uso de Clientes
+│   │   │   │   ├── DTOs/                       # 📋 DTOs (RegisterCustomerDTO, UpdateAddressDTO)
+│   │   │   │   └── UseCases/                   # ⚙️ Casos de Uso (RegisterCustomerUseCase, AuthenticateUseCase)
+│   │   │   ├── Order/                          # 🧾 Casos de Uso de Pedidos
+│   │   │   │   ├── DTOs/                       # 📋 DTOs (CheckoutDTO, OrderSummaryDTO)
+│   │   │   │   └── UseCases/                   # ⚙️ Casos de Uso (ProcessCheckoutUseCase, CancelOrderUseCase)
+│   │   │   └── POS/                            # 🏪 Casos de Uso de PDV
+│   │   │       ├── DTOs/                       # 📋 DTOs (CreatePreSaleDTO, ProcessPaymentDTO)
+│   │   │       └── UseCases/                   # ⚙️ Casos de Uso (EmitPreSaleTicketUseCase, FinalizeSaleUseCase)
+│   │   │
+│   │   ├── Infrastructure/                     # 🔌 Camada de Infraestrutura e Adaptadores Externos
+│   │   │   ├── Persistence/                    # 🗄️ Acesso a Dados e Mapeamento Objeto-Relacional
+│   │   │   │   ├── Connection/                 # 🔌 Gerenciador de conexão PDO/MySQL
+│   │   │   │   ├── QueryBuilder/               # 🔍 Construtor de queries seguras e parametrizadas
+│   │   │   │   ├── UnitOfWork/                 # 🔄 Padrão Unit of Work e Identity Map
+│   │   │   │   ├── Mappers/                    # 🗺️ Data Mappers (Tradutores SQL ⇄ Entidades de Domínio)
+│   │   │   │   └── Repositories/               # 🗃️ Implementação concreta dos repositórios via SQL
+│   │   │   ├── Cache/                          # ⚡ Adaptadores de Cache (RedisAdapter, MemoryAdapter)
+│   │   │   ├── Messaging/                      # 📬 Mensageria e Filas Assíncronas (RabbitMQ, EventPublisher)
+│   │   │   ├── Security/                       # 🛡️ Criptografia, Hasher Argon2id e Provedor JWT
+│   │   │   └── Gateways/                       # 🌐 Clientes de Serviços Externos
+│   │   │       ├── Payments/                   # 💳 Adaptadores de Pagamento (Stripe, Pix, TEF)
+│   │   │       ├── Shipping/                   # 🚚 Adaptadores de Frete (Correios, Transportadoras)
+│   │   │       └── Fiscal/                     # 🧾 Adaptadores Fiscais (NFC-e / SEFAZ)
+│   │   │
+│   │   └── Http/                               # 🌐 Camada de Entrada e Apresentação HTTP (PSR-7 / PSR-15)
+│   │       ├── Middlewares/                    # 🧱 Middlewares HTTP (Guards, CSRF, Auth, RateLimit)
+│   │       ├── Responders/                     # 🎯 Responders ADR (TwigResponder, JsonApiResponse, RedirectResponse)
+│   │       └── Controllers/                    # 🎮 Action Controllers desacoplados por contexto
+│   │           ├── Storefront/                 # 🛍️ Actions da Loja (Catalog, Cart, Checkout, Account)
+│   │           ├── Admin/                      # 🛡️ Actions do Painel (Dashboard, Catalog, Sales, CRM, Settings)
+│   │           ├── POS/                        # 🏪 Actions do PDV (SalesRep, Cashier)
+│   │           └── Api/                        # 🤖 Actions da API RESTful (v1)
+│   │
+│   └── resources/                              # 🎨 Recursos Estáticos Não-Compilados e Views
+│       ├── locales/                            # 🌐 Arquivos de Internacionalização i18n
+│       │   ├── en-gb/                          # 🇬🇧 Inglês
+│       │   ├── es-es/                          # 🇪🇸 Espanhol
+│       │   └── pt-br/                          # 🇧🇷 Português do Brasil (Padrão)
+│       └── views/                              # 🖼️ Templates Twig (Padronização Estrita Kebab-Case)
+│           ├── components/                     # 🧩 Atomic Design Global
+│           │   ├── atoms/                      # 🔬 Botões, inputs, badges, ícones
+│           │   ├── molecules/                  # 🧬 Cards de produto, searchbars, alertas
+│           │   └── organisms/                  # 🧱 Headers, footers, tabelas de listagem
+│           ├── layouts/                        # 📐 Layouts base compartilhados (base, auth, error)
+│           ├── storefront/                     # 🛍️ Templates da Loja Virtual
+│           │   ├── catalog/                    # 📦 Listagem de produtos, busca, categorias
+│           │   ├── checkout/                   # 💳 Telas de carrinho, endereço e pagamento
+│           │   └── customer/                   # 👤 Painel do cliente e autenticação
+│           ├── admin/                          # 🛡️ Templates do Backoffice
+│           │   ├── catalog/                    # 🗄️ Gestão de produtos, categorias, marcas
+│           │   ├── crm/                        # 💼 Gestão de clientes e aprovações
+│           │   ├── dashboard/                  # 📊 Visão geral e métricas de vendas
+│           │   ├── sales/                      # 🧾 Gestão de pedidos e notas
+│           │   └── settings/                   # ⚙️ Parâmetros gerais e de loja
+│           └── pos/                            # 🏪 Templates do Ponto de Venda
+│               ├── cashier/                    # 💰 Interface do Operador de Caixa
+│               └── sales-rep/                  # 🧑‍💼 Interface do Vendedor de Balcão
+│
+├── public_html/                                # 🌐 Webroot (Único Document Root Exposto na Hospedagem)
+│   ├── index.php                               # 🚀 Front Controller Único (Roteia Store, Admin, POS e API)
+│   ├── robots.txt                              # 🤖 Diretivas de indexação para motores de busca
+│   ├── favicon.ico                             # 🌐 Ícone da aplicação
+│   ├── assets/                                 # 🎨 Assets Públicos Estáticos Compilados
+│   │   ├── css/                                # 🎨 Folhas de estilo compiladas/minificadas
+│   │   ├── js/                                 # ⚡ Bundles JavaScript otimizados
+│   │   └── fonts/                              # 🔤 Fontes locais e tipografias
+│   └── uploads/                                # 🖼️ Diretório isolado para uploads públicos (com restrição PHP)
+│
+├── database/                                   # 🗄️ Controle e Versionamento do Banco de Dados
+│   ├── migrations/                             # 📂 Scripts de criação e migração de tabelas
+│   ├── seeds/                                  # 📂 Dados sementes de povoamento inicial
+│   └── schemas/                                # 📂 Modelos conceituais e diagramas relacionais
+│
+├── docs/                                       # 📚 Central Unificada de Documentação do Projeto
+│   ├── architecture/                           # 🏗️ Visão arquitetural, ADRs e diagramas técnicos
+│   │   ├── adr/                                # 📝 Architecture Decision Records (Registros de Decisões)
+│   │   ├── deployment/                         # 🚀 Manuais de deploy e infraestrutura
+│   │   ├── file_structure_diagram.puml         # 🗺️ Mapa da estrutura da fase Alpha (legado)
+│   │   └── file_structure_diagram_future.puml   # 🗺️ Mapa da arquitetura alvo (futura)
+│   ├── business/                               # 💼 Regras de negócio, glossário e processos
+│   ├── database/                               # 🗄️ Diagramas ER/EER e dicionário de dados
+│   ├── diagrams/                               # 📊 Diagramas gerais para stakeholders e engenharia
+│   ├── specs/                                  # 📋 Especificações formais (OpenAPI 3.1, BDD Gherkin)
+│   └── workflows/                              # 🔄 Diagramas de sequência e atividade
+│
+├── scripts/                                    # 🛠️ Utilitários de DevOps, Deploy, CI e Manutenção
+│   ├── devops/                                 # 🚢 Scripts de provisionamento e deploy
+│   └── workers/                                # ⚙️ Scripts de execução de filas CLI (RabbitMQ Workers)
+│
+└── tests/                                      # 🧪 Pirâmide Completa de Testes Automatizados (PHPUnit)
+    ├── Unit/                                   # 🔬 Testes Unitários de Regras de Domínio (Sem Banco)
+    ├── Integration/                            # 🧩 Testes de Integração (Banco de Dados, Mappers, Cache)
+    ├── Functional/                             # 🚦 Testes Funcionais de Rotas e Middlewares HTTP
+    └── E2E/                                    # 🎭 Testes Ponta a Ponta de Fluxos Críticos
+@endfiles

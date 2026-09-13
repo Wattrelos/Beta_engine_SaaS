@@ -17,8 +17,7 @@
 │   │       │   ├── components/                 # 🖥️ Componentes
 │   │       │   │   └── organisms/              # 🗄️ Organismos
 │   │       │   ├── customer/                   # 🗄️ Clientes
-│   │       │   │   ├── Address/                # 🗄️ Endereços
-│   │       │   │   └── customer/               # 🗄️ Clientes
+│   │       │   │   └── address/                # 🗄️ Endereços
 │   │       │   ├── layouts/                    # 🗄️ Layouts
 │   │       │   ├── macros/                     # 🗄️ Macros
 │   │       │   ├── order/                      # 🗄️ Pedidos
@@ -26,11 +25,11 @@
 │   │       │   │   ├── category/               # 🖥️ Categorias
 │   │       │   │   ├── dashboard/              # �️ Dashboard
 │   │       │   │   ├── errors/                 # 🔧 Erros
-│   │       │   │   └── products/               # 🖥️ Produtos
+│   │       │   │   └── product/                # 🖥️ Produtos
 │   │       │   ├── sales/                      # 🗄️ Vendas
 │   │       │   │   └── order/                  # 🖥️ Pedidos
 │   │       │   └── setting/                    # 🗄️ Configurações
-│   │       │       └── store_setting/          # 🗄️ Configurações da loja
+│   │       │       └── store-setting/          # 🗄️ Configurações da loja
 │   │       ├── components/                     # 🖥️ Atomic Design (atoms, molecules, organisms)
 │   │       │   ├── atoms/                      # 🖥️ Átomos
 │   │       │   ├── molecules/                  # 🖥️ Moléculas
@@ -71,34 +70,32 @@
 │   │                   └── product/              # 🖥️ Produtos
 │   ├── scripts/                                # 📂 Scripts
 │   ├── core/                                   # 🤖 Lógica principal da aplicação (Core Business Logic)
-│   │   ├── Admin/                              # 🖥️ Painel de Controle (Backoffice / Admin Panel)
+│   │   ├── Admin/                              # 🖥️ Painel de Controle dashboard (Backoffice / Admin Panel)
 │   │   │   ├── Controllers/                    # 🖥️ Controladores do Admin
 │   │   │   │   └── Actions/                    # 🔄 Ações do Admin
 │   │   │   │       ├── Auth/                   # 🔑 Rotas de Login, Registro e Conta Logada
-│   │   │   │       ├── CRM/                    # 💼 Gestão de Clientes
-│   │   │   │       │   └── Customer/           # 🖥️ Ações relacionadas aos clientes
 │   │   │   │       ├── Catalog/                # 📂 Focado no catálogo e cliente final
-│   │   │   │       │   ├── Category/           # 🖥️ Ações relacionadas às categorias
-│   │   │   │       │   ├── Manufacturer/       # 🖥️ Ações relacionadas aos fabricantes
-│   │   │   │       │   └── Product/            # 🖥️ Ações relacionadas aos produtos
-│   │   │   │       ├── Customer/               # 🖥️ Ações relacionadas aos clientes
-│   │   │   │       │   ├── Address/            # 🖥️ Endereços de clientes
-│   │   │   │       │   └── Customer/           # 🖥️ Ações relacionadas aos clientes
-│   │   │   │       ├── Dashboard/              # 📊 Dashboard do Admin
+│   │   │   │       │   ├── Category/           # 🖥️ Gestão relacionadas às categorias
+│   │   │   │       │   ├── Manufacturer/       # 🖥️ Gestão relacionadas aos fabricantes
+│   │   │   │       │   └── Product/            # 🖥️ Gestão relacionadas aos produtos
+│   │   │   │       ├── Customer/               # 🖥️ Gestão relacionadas aos clientes
+│   │   │   │       │   ├── CRM/                # 💼 Gestão de Gestão de Relacionamento com o Cliente
+│   │   │   │       │   ├── Address/            # 🖥️ Gestão de Endereços de clientes
+│   │   │   │       │   └── Customer/           # 🖥️ Gestão de Clientes
+│   │   │   │       ├── Dashboard/              # 📊 Gestão do Dashboard do Admin
 │   │   │   │       ├── Procurement/            # 🛒 Focado na gestão interna e compras
-│   │   │   │       │   └── Supplier/           # � Ações relacionadas aos fornecedores
-│   │   │   │       ├── Sales/                  # 💳 Rotas de Vendas
-│   │   │   │       │   ├── Order/              # 📦 Ações relacionadas aos pedidos
-│   │   │   │       │   └── Voucher/            # 💰 Ações relacionadas aos vouchers
-│   │   │   │       └── Setting/                # ⚙️ Configurações do Admin
-│   │   │   │           └── StoreSetting/       # ⚙️ Configurações de lojas
+│   │   │   │       │   └── Supplier/           # 🖥️ Gestão de Fornecedores
+│   │   │   │       ├── Sales/                  # 💳 Gestão de Vendas
+│   │   │   │       │   ├── Order/              # 📦 Gestão de Pedidos
+│   │   │   │       │   └── Voucher/            # 💰 Gestão de Vouchers
+│   │   │   │       └── Setting/                # ⚙️ Gestão de Configurações do Admin
+│   │   │   │           └── StoreSetting/       # ⚙️ Gestão de Configurações de lojas
 │   │   │   └── Repositories/                   # 🗂️ Repositórios específicos da área administrativa
 │   │   ├── Auth/                               # 🔐 Módulo de Autenticação e Segurança
 │   │   │   ├── Middleware/                     # 🧱 Guards PSR-15 (Signature, Session, Language, Redirects)   
 │   │   │   └── Services/                       # 🔐 Regras de negócio de acesso (ex: CustomerAuthService)
-│   │   ├── Controller/                         # 🎮 Controladores (Skinny Controllers / Actions)
-│   │   │   └── BaseController.php              # 🎮 Controller abstrato base da aplicação
-│   │   │   └── Actions/                        # 🎮 Ações HTTP no padrão ADR (Action-Domain-Responder)
+│   │   ├── Controllers/                         # 🎮 Controladores (Skinny Controllers / Actions)
+│   │   │   ├── Actions/                        # 🎮 Ações HTTP no padrão ADR (Action-Domain-Responder)
 │   │   │   │   ├── Cart/                       # 🛒 Rotas de Carrinho e Checkout
 │   │   │   │   ├── Category/                   # 📦 Rotas de categorias
 │   │   │   │   ├── Checkout/                   # 💳 Rotas de checkout
@@ -114,12 +111,12 @@
 │   │   │   ├── Auth/                           # 🔑 Ações de autenticação
 │   │   │   └── Web/                            # 🌐 Ações da Web
 │   │   ├── Mappers/                            # 🗺️ Data Mappers (Acesso e isolamento de Banco de Dados)
-│   │   │   ├── EntityMappers/                  # 🌐 Tradutores entre Banco e Entidades (ex: ProductMapper)
-│   │   │   └── Observers/                      # 👀 Padrão Observer para side-effects (ex: enviar emails)
+│   │   │   └── EntityMappers/                  # 🌐 Tradutores entre Banco e Entidades (ex: ProductMapper)
 │   │   ├── Model/                              # 🏛️ Coração do Domínio (DDD)
-│   │   │   ├── DataAccessObject/               # 🗂️ Camada DAO (Conexões PDO, QueryBuilder, UnitOfWork)
-│   │   │   ├── DataTransferObject/             # 🗂️ DTOs de transporte (ex: ViewResponse)
-│   │   │   │   └── Attributes/                 # 🗂️ Atributos de DTOs
+│   │   │   ├── Persistence/                    # 💾 Camada de Persistência
+│   │   │   │   ├── DataAccessObject/           # 🗂️ Camada DAO (Conexões PDO, QueryBuilder, UnitOfWork)
+│   │   │   │   └── DataTransferObject/         # 🗂️ DTOs de transporte (ex: ViewResponse)
+│   │   │   │       └── Attributes/             # 🗂️ Atributos de DTOs
 │   │   │   └── Domain/                         # 🏛️ Lógica de Domínio Estrutural
 │   │   │       ├── Attributes/                 # 🏛️ Atributos de domínio
 │   │   │       ├── DTOs/                       # 🏛️ DTOs de domínio
@@ -144,9 +141,6 @@
 │   │   │   └── Twig/                           # 🖼️ Camada de Renderização
 │   │   └── View/                               # 🖼️ Camada de Renderização
 │   │       └── Errors/                         # 🔧 Erros
-│   ├── BusinessKnowledgeBase/                  # 📂 Base de Conhecimento Corporativa
-│   │   └── enterprise_context.jsonc            # 📄 Contexto corporativo e regras de negócio
-│   ├── diagramsForStackholders/                # 📊 Diagramas visuais para Stakeholders (Comercial)
 │   └── Locales/                                # 🌐 Arquivos de internacionalização
 │       ├── en-gb/                              # 🇬🇧 Inglês britânico
 │       ├── es-es/                              # 🇪🇸 Espanhol da espanha
@@ -163,6 +157,7 @@
 │   ├── image/                                  # 🖼️ Imagens públicas e uploads
 │   ├── js/                                     # ⚡ Scripts Vanilla JS e integrações de formulário (AJAX)
 │   └── admin-ZPdHED2dC7Gjrg2b/                 # 🛡️ Root público do painel administrativa (ofuscado p/ segurança)
+│        └── index.php                          # 🚀 Front Controller (inicializa Bootstrap do admin-dashboard/)
 │
 │   # =====================================> Pastas que não irão para produção (testes, docs e specs)  <=========================
 │
