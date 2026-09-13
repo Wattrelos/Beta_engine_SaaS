@@ -1,0 +1,114 @@
+business_rules:
+  products:
+    - id: RN001
+      name: variacoes_de_unidades
+      type: pisos_e_azulejos
+      available_units: [peca, metro_quadrado]
+      behavior: calculo_automatico_preco_total
+      variables: [quantidade, unidade_selecionada]
+
+    - id: RN002
+      name: peso_e_dimensoes
+      required_fields: [peso, altura, largura, comprimento]
+      purpose: calculo_de_frete
+      impact: alta_sensibilidade_custo_envio
+
+    - id: RN003
+      name: informacoes_tecnicas
+      required: true
+      details_by_category:
+        tools: [voltagem]
+        tints: [especificacoes_de_uso]
+        cement: [resistencia, tempo_de_secagem]
+      purpose: evitar_erros_de_compra
+
+    - id: RN004
+      name: kit_de_produtos
+      functionality: criar_combos
+      benefits: [descontos, facilidade_compra]
+      examples: 
+        - raw_combo: [bricks, sand, cement, stone]
+        - paint_combo: [paints, brushes, sanders, base, sealants]
+
+  inventory_and_logistics:
+    - id: RN005
+      name: controle_estoque_rigoroso
+      update: automatica_pos_venda
+      avoid_sale: itens_indisponiveis
+      special_rule: monitoramento_continuo_para_itens_pesados_ou_alta_demanda
+
+    - id: RN006
+      name: alerta_baixo_estoque
+      trigger: estoque_atual <= nivel_minimo_predefinido
+      action: enviar_alerta_equipe_administrativa
+
+    - id: RN007
+      name: multiplas_opcoes_frete
+      selection_criteria: dimensoes_e_peso
+      modalities:
+        small_light_items: Correios
+        large_heavy_items: Transportadoras
+
+    - id: RN008
+      name: frete_gratis_e_retirada
+      free_shipping_conditions:
+        minimal_amount: true
+        regional_restriction: regras_especificas_por_regiao
+      alternative_option: retirada_na_loja_fisica
+
+  customer:
+    - id: RN009
+      name: politica_de_devolucao
+      status: ativo
+
+    - id: RN010
+      name: clareza_na_troca
+      focus_sensitive_categories: [tintas_cores, materiais_de_acabamento]
+
+    - id: RN011
+      name: direito_de_arrependimento
+      prazo_cdc: 7_dias
+      acceptance_rules::
+        original_package: obrigatorio
+        damaged_package: "recusado (excecao: defeito de fabricacao)"
+      exception_rule:
+        store_pickup: "nao possui direito aos 7 dias de arrependimento"
+
+    - id: RN012
+      name: documentacao_obrigatoria_retorno
+      required_documentos: [nota_fiscal, selo_etiqueta_de_garantia]
+
+    - id: RN013
+      name: comunicacao_atrasos
+      action_type: notificacao_proativa_cliente
+      objective: [gerenciar_expectativas, manter_credibilidade]
+
+    - id: RN014
+      name: suporte_pos_venda
+      available_channels: [chat_online, telefone]
+      scope: [duvidas_instalacao, uso_de_produtos]
+
+  pricing:
+    - id: RN015
+      name: descontos_por_volume
+      model: progressivo
+      aplicabilidade: [cimento, areia, tijolos, telhas]
+      target_public: [clientes_construindo, clientes_reformando]
+
+    - id: RN016
+      name: descontos_por_modalidade
+      cash_payment_conditions: [dinheiro, PIX]
+
+    - id: RN017
+      name: preco_varejo_e_atacado
+      segmentation:
+        retail: pessoa_fisica
+        wholesale: empresas
+      change_criteria: [volume_de_compra, tipo_de_cadastro]
+
+    - id: RN018
+      name: campanhas_por_categoria
+      funcionality: criar_promocoes_direcionadas
+      examples:
+        - Semana do Piso e Revestimento
+        - Mês das Ferramentas

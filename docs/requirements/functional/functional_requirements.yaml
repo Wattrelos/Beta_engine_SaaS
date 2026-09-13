@@ -1,0 +1,143 @@
+functional_requirements:
+  product_module:
+    - id: RF001
+      prio: H
+      name: Cadastro produtos + fotos
+      desc: SYS_PERMIT cadastro produtos com IMG_HD.
+      trace: [RN003]
+
+    - id: RF002
+      prio: H
+      name: Exibição specs técnicas
+      desc: SYS_PERMIT exibir dimensões, peso e material do produto.
+      trace: [RN002, RN003]
+
+    - id: RF003
+      prio: M
+      name: Categorização produtos
+      desc: SYS_PERMIT agrupar por tipo (elétrico, hidráulico, pisos), marca, cor, aplicação.
+
+    - id: RF004
+      prio: M
+      name: Venda múltiplas unidades
+      desc: SYS_PERMIT venda por un, m², cx, kg, L + tabelas de conversão.
+      trace: [RN001]
+
+    - id: RF005
+      prio: H
+      name: CRUD Admin produtos
+      desc: CRUD completo de name, desc, preço, IMG_HD, vídeos, SKUs e peso.
+
+    - id: RF006
+      prio: H
+      name: Gestão automática inventário
+      desc: SYS_EXEC estoque: REALTIME pós-venda + consulta saldo.
+      trace: [RN005]
+
+  module_purchase:
+    - id: RF007
+      prio: L
+      name: Criação kits/combos
+      desc: SYS_PERMIT agrupar produtos em combos promocionais.
+      trace: [RN004]
+
+    - id: RF008
+      prio: L
+      name: Sugestão correlatos
+      desc: SYS_PERMIT exibir Recomendações Cross-selling na jornada.
+
+    - id: RF009
+      prio: H
+      name: Cartão/Carrinho compras
+      desc: SYS_PERMIT adicionar, remover, alterar quantidade itens.
+
+    - id: RF010
+      prio: H
+      name: Cálculo frete dinâmico
+      desc: SYS_EXEC cálculo frete via peso, volume, CEP destino.
+      trace: [RN002, RN007, RN008]
+
+    - id: RF011
+      prio: M
+      name: Busca + filtros eficientes
+      desc: SYS_PERMIT busca indexada + filtros preço, categoria, marca, atributos.
+
+    - id: RF012
+      prio: M
+      name: PDP (Product Detail Page)
+      desc: SYS_PERMIT página dedicada: specs, IMG_HD, seletor variações.
+
+    - id: RF013
+      prio: L
+      name: Avaliações/Reviews
+      desc: SYS_PERMIT ratings, reviews, comentários clientes.
+
+  module_user:
+    - id: RF014
+      prio: H
+      name: Auth/Sign-up
+      desc: SYS_PERMIT login Email/Senha ou Social Auth (OAuth2).
+
+    - id: RF015
+      prio: L
+      name: Reset senha
+      desc: SYS_PERMIT fluxo de recuperação de credenciais.
+
+    - id: RF016
+      prio: H
+      name: Histórico pedidos
+      desc: SYS_EXEC persistência e exibição de compras passadas/user.
+
+    - id: RF017
+      prio: L
+      name: Múltiplos SHIPTOS
+      desc: SYS_PERMIT salvar múltiplos endereços de entrega/user.
+
+  module_payment:
+    - id: RF018
+      prio: H
+      name: Multi-meios pagamento
+      desc: SYS_PERMIT checkout via Cartão, Boleto, PIX.
+      trace: [RN016]
+
+    - id: RF019
+      prio: L
+      name: INTEG Gateway
+      desc: INTEG com gateway de pagamento seguro.
+
+    - id: RF020
+      prio: H
+      name: Faturamento / NF-e
+      desc: SYS_EXEC emissão automática de NF-e.
+      trace: [RN012]
+
+  module_logistics:
+    - id: RF021
+      prio: M
+      name: Modalidades entrega
+      desc: SYS_PERMIT escolha BOPIS (retirada loja) ou entrega padrão.
+      trace: [RN008]
+
+    - id: RF022
+      prio: M
+      name: Last-mile tracking
+      desc: SYS_PERMIT rastreio REALTIME status pedido/entrega.
+      trace: [RN013]
+
+  module_administration:
+    - id: RF023
+      prio: H
+      name: Gestão catálogo/preços
+      desc: CRUD Admin para catálogo global e tabelas precificação.
+      trace: [RN017, RN018]
+
+    - id: RF024
+      prio: L
+      name: Alerta Stockout
+      desc: SYS_PERMIT dashboard/alerta automático de threshold mínimo estoque.
+      trace: [RN006]
+
+    - id: RF025
+      prio: M
+      name: Analytics / Relatórios
+      desc: SYS_PERMIT exportar relatórios gerenciais vendas/performance.
