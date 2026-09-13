@@ -1,0 +1,84 @@
+# Environment & Secrets
+# Bloqueia qualquer arquivo .env em qualquer pasta do projeto (raiz ou subpastas)
+.env
+.env.*
+
+# Abre a exceção para qualquer .env.example do projeto
+!.env.example
+
+
+# Build & Release Artifacts (ZIPs e Pacotes de Release)
+dist/
+backend/dist/
+backend/dist/agsonhos-release.zip
+*.zip
+*.tar.gz
+*.tgz
+*.rar
+
+# Documents
+# Documentos reservados (Administrativos/Legais)
+# docs/legal/ # Atenção: Se tornar público o repositório remova a `#` antes de `docs/legal/`!
+
+# Storage, Cache e Logs
+storage/
+backend/storage/
+backend/storage/cache/*
+backend/storage/download/*
+backend/storage/logs/*
+backend/storage/session/*
+backend/storage/upload/*
+backend/storage/alpha_proxies/*
+backend/LogsPersonalizados/*
+
+# Manter arquivos .gitkeep nas pastas de storage
+!backend/storage/cache/.gitkeep
+!backend/storage/download/.gitkeep
+!backend/storage/logs/.gitkeep
+!backend/storage/session/.gitkeep
+!backend/storage/upload/.gitkeep
+
+# Dependências do Composer
+vendor/
+backend/vendor/
+composer.lock
+backend/composer.lock
+
+# Caches de Testes e Análise Estática
+.phpunit.cache/
+backend/.phpunit.cache/
+.reports/
+backend/.reports/
+.phpstan.cache
+backend/.phpstan.cache
+
+# Rascunhos e Documentação Temporária
+scratch/
+backend/scratch/
+readme_backup/
+.joplin_export/
+docs/joplin/*
+
+# Configurações do Agente e da IDE
+.agents/
+.aiexclude
+.gemini/
+.vscode/
+.idea/
+*.swp
+*.log
+.DS_Store
+Thumbs.db
+
+# Imagens Dinâmicas / Cache da Loja
+/public_html/image/product/*
+/public_html/cache/*
+/public_html/image/cache/*
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
