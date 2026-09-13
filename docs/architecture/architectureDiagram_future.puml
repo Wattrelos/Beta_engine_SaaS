@@ -1,0 +1,204 @@
+@startuml "Beta Engine SaaS - Target Clean Architecture Diagram (Future)"
+
+skinparam defaultFontName "Inter", "Segoe UI", "Helvetica", sans-serif
+skinparam roundCorner 8
+skinparam shadowing false
+skinparam packageStyle rectangle
+
+skinparam package {
+    BackgroundColor #F8FAFC
+    BorderColor #94A3B8
+    FontColor #0F172A
+    FontStyle bold
+}
+
+skinparam component {
+    BackgroundColor #FFFFFF
+    BorderColor #CBD5E1
+    FontColor #1E293B
+}
+
+skinparam database {
+    BackgroundColor #EFF6FF
+    BorderColor #3B82F6
+    FontColor #1E3A8A
+}
+
+skinparam queue {
+    BackgroundColor #FEF3C7
+    BorderColor #D97706
+    FontColor #78350F
+}
+
+' ==============================================================================
+' 0. FRAMEWORK & HTTP ENTRYPOINT
+' ==============================================================================
+package "0. HTTP Delivery & Bootstrap (PSR-7 / PSR-15 / PSR-11)" as DeliveryLayer {
+    [public_html/index.php\n(Single Front Controller)] as Entrypoint
+    [config/routes/\n(Storefront, Admin, POS, Api)] as RouteDefinitions
+    [AppContainer (PHP-DI / PSR-11)] as Container
+}
+
+' ==============================================================================
+' 1. MIDDLEWARE PIPELINE
+' ==============================================================================
+package "1. Guard & Pipeline Middlewares (PSR-15)" as MiddlewareLayer {
+    [LanguageNegotiatorMiddleware] as LangMW
+    [AuthGuardMiddleware\n(Session & JWT Guard)] as AuthMW
+    [AntiCsrfMiddleware] as CsrfMW
+    [RateLimiterMiddleware] as RateMW
+}
+
+' ==============================================================================
+' 2. PRESENTATION LAYER (ADR - Action-Domain-Responder)
+' ==============================================================================
+package "2. Presentation Layer (ADR Pattern)" as PresentationLayer {
+    package "Action Controllers (Skinny Actions)" as ActionControllers {
+        [Storefront Actions] as StorefrontAction
+        [Admin Actions] as AdminAction
+        [POS Actions] as PosAction
+        [API REST Actions] as ApiAction
+    }
+    
+    package "Responders" as Responders {
+        [TwigHtmlResponder] as TwigResponder
+        [JsonApiResponse] as JsonResponder
+        [RedirectResponder] as RedirectResponder
+    }
+
+    package "Views & Templates" as ViewLayer {
+        [TwigEnvironment] as Twig
+        [Twig Templates\n(resources/views/)] as Views
+    }
+}
+
+' ==============================================================================
+' 3. APPLICATION LAYER (Use Cases & Orchestration)
+' ==============================================================================
+package "3. Application Layer (Use Cases & DTOs)" as ApplicationLayer {
+    [DTOs (Input / Output Contracts)] as AppDTOs
+    [Use Cases / Command Handlers\n(e.g., ProcessCheckoutUseCase,\nCreatePreSaleUseCase, RegisterCustomerUseCase)] as UseCases
+    [Unit of Work (UoW Interface)] as UoWInterface
+    [DomainEventDispatcherInterface] as EventBusInterface
+}
+
+' ==============================================================================
+' 4. DOMAIN LAYER (Pure Enterprise Business Logic)
+' ==============================================================================
+package "4. Domain Layer (Pure DDD - Zero External Dependencies)" as DomainLayer {
+    [Aggregate Roots & Entities\n(Order, Customer, Product, User)] as Entities
+    [Value Objects (Immutable)\n(Money, Email, CpfCnpj, Address)] as ValueObjects
+    [Domain Events\n(OrderPlaced, PaymentReceived)] as DomainEvents
+    
+    package "Repository Contracts (Interfaces)" as DomainContracts {
+        interface "OrderRepositoryInterface" as OrderRepoInterface
+        interface "CustomerRepositoryInterface" as CustomerRepoInterface
+        interface "ProductRepositoryInterface" as ProductRepoInterface
+    }
+}
+
+' ==============================================================================
+' 5. INFRASTRUCTURE & ADAPTERS (Driven Adapters)
+' ==============================================================================
+package "5. Infrastructure & Adapters Layer" as InfraLayer {
+    package "Persistence (SQL & Data Mapping)" as PersistenceInfra {
+        [SqlRepositories\n(OrderRepository, CustomerRepository)] as ConcreteRepos
+        [Data Mappers\n(Hydrators & SQL ⇄ Domain Translators)] as Mappers
+        [DataAccessObject (DAO / PDO)] as DAO
+        [QueryBuilder] as QB
+        [UnitOfWork Implementation] as ConcreteUoW
+        [Identity Map\n(RAM In-Memory Cache)] as IdentityMap
+    }
+    
+    package "External Gateways & Clients" as ExternalGateways {
+        [PaymentGatewayAdapters\n(Stripe, Pix, TEF)] as PaymentAdapters
+        [ShippingGatewayAdapters\n(Correios, Transportadoras)] as ShippingAdapters
+        [FiscalGatewayAdapters\n(NFC-e / SEFAZ)] as FiscalAdapters
+    }
+    
+    package "Async Messaging & Events" as AsyncMessaging {
+        [DomainEventDispatcher] as ConcreteEventBus
+        [RabbitMQ QueueService] as QueueService
+        [Worker CLI Consumers] as QueueWorkers
+    }
+}
+
+' ==============================================================================
+' 6. EXTERNAL DRIVERS & STORAGE
+' ==============================================================================
+package "6. Databases & Storage Drivers" as StorageLayer {
+    database "MySQL 8.0\n(InnoDB Primary Storage)" as MySQL
+    database "Redis 7.x\n(Cache & Distributed Session)" as Redis
+    queue "RabbitMQ 3.x\n(Message Broker)" as RabbitMQ
+}
+
+' ==============================================================================
+' RELATIONSHIPS & FLOW OF CONTROL
+' ==============================================================================
+
+' --- BOOTSTRAP & ROUTING ---
+Entrypoint --> RouteDefinitions : Dispatches Request
+Entrypoint --> Container : Bootstraps DI Container
+RouteDefinitions --> MiddlewareLayer : Global & Group Pipeline
+
+' --- MIDDLEWARE EXECUTION ---
+LangMW --> RouteDefinitions : Resolves Locale
+AuthMW --> Redis : Validates Session Token
+RateMW --> Redis : Checks Rate Limits
+
+' --- ROUTING TO ACTIONS ---
+RouteDefinitions --> StorefrontAction : Invokes
+RouteDefinitions --> AdminAction : Invokes
+RouteDefinitions --> PosAction : Invokes
+RouteDefinitions --> ApiAction : Invokes
+
+' --- DI RESOLUTION (Clean, No God Object) ---
+Container ..> ActionControllers : Injects via Constructor
+Container ..> UseCases : Injects Repositories & Services
+Container ..> ConcreteRepos : Injects PDO & Mappers
+
+' --- PRESENTATION & APPLICATION ORCHESTRATION ---
+ActionControllers --> AppDTOs : Maps HTTP input
+ActionControllers --> UseCases : Executes (DTO)
+ActionControllers --> Responders : Sends Output DTO
+
+' --- RESPONDERS ---
+TwigResponder --> Twig : Injects Data
+Twig --> Views : Compiles HTML
+JsonResponder --> DeliveryLayer : Returns JSON (PSR-7)
+
+' --- USE CASE ORCHESTRATION ---
+UseCases --> Entities : Enforces Business Logic
+UseCases --> ValueObjects : Uses
+UseCases --> DomainContracts : Persists through Interfaces
+UseCases --> ConcreteUoW : Coordinates ACID Transactions
+UseCases --> ExternalGateways : Delegates 3rd-party calls
+UseCases --> EventBusInterface : Publishes Domain Events
+
+' --- DOMAIN PURITY (Entities raise events) ---
+Entities ..> DomainEvents : Instantiates
+Entities --> ValueObjects : Composed of
+
+' --- INFRASTRUCTURE PERSISTENCE IMPLEMENTATIONS ---
+ConcreteRepos .up.|> DomainContracts : Implements Interface
+ConcreteRepos --> Mappers : Hydrates Entities
+ConcreteRepos --> Redis : Cache Aside Strategy
+ConcreteUoW .up.|> UoWInterface : Implements Interface
+ConcreteUoW --> DAO : Manages Transaction Boundary
+
+Mappers --> DAO : Executes Prepared Statements
+DAO --> QB : Builds Parameterized SQL
+DAO --> IdentityMap : Prevents Duplicate Instances
+DAO --> MySQL : Reads/Writes via PDO
+
+' --- ASYNC EVENT FLOW ---
+ConcreteEventBus .up.|> EventBusInterface : Implements
+ConcreteEventBus --> QueueService : Publishes Serialized Event
+QueueService --> RabbitMQ : Enqueues Messages
+RabbitMQ --> QueueWorkers : Consumes Tasks
+QueueWorkers --> UseCases : Triggers Background Handlers
+
+' --- EXTERNAL GATEWAYS CALLS ---
+PaymentAdapters --> ExternalGateways : External HTTP API Calls
+
+@enduml
